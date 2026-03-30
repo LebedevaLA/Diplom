@@ -49,10 +49,15 @@ if __name__ == "__main__":
 
             elif classes[j] == 'periodic':
                 #freq - важный параметр который влияет на остальные
-                if func_data.get('type') == 'sin_cos':
-                    # amp_sin, amp_cos, freq, shift
-                    bounds = [(-10, 10), (-10, 10), (0.1, 0.5), (-10, 10)]
-                elif func_data.get('type') == 'sin_cos_mix' or func_data.get('type') == 'sin_sin' or func_data.get('type') == 'cos_cos':
+                
+                if func_data.get('type') == 'sin_cos_sin':
+                   bounds = [
+                        (-10, 10), (0.5, 1.0), (0, 2*np.pi),  # amp1, freq1, phase1
+                        (-10, 10), (0.5, 1.0), (0, 2*np.pi),  # amp2, freq2, phase2
+                        (-10, 10), (0.5, 1.0), (0, 2*np.pi),  # amp3, freq3, phase3
+                        (-10, 10)                             # shift
+                    ]
+                elif  func_data.get('type') == 'sin_sin' or func_data.get('type') == 'cos_cos':
                     bounds = [(-10, 10), (0.1, 0.5), (0, 2*np.pi), (-10, 10),(0.1, 0.5),(0, 2*np.pi),(-10, 10)]
                 else:
                     # amp, freq, phase, shift

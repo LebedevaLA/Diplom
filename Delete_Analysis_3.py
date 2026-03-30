@@ -71,7 +71,7 @@ def create_save_4gr(original_data, no_del_data, del_data, recovered_data, class_
 
 
 
-def plot_random_functions_from_results(data_file='del_results/best_del_results.pkl', 
+def plot_random_functions_from_results(data_file='del_results/all_results.pkl', 
                                         n_samples=3, 
                                         save_dir='comparison_plots_res'):
     """
@@ -134,6 +134,25 @@ def plot_random_functions_from_results(data_file='del_results/best_del_results.p
     print(f"\nВсе графики сохранены в директории '{save_dir}/'")
 
 
+# Функция чтобы заглянуть в all_results (для самопроверки)
+def check_data_structure(data_file='del_results/all_results.pkl'):
+    """Проверяет, какие ключи есть в сохраненных данных"""
+    with open(data_file, 'rb') as f:
+        all_results = pickle.load(f)
+    
+    for class_name in ['unimodal', 'periodic', 'piecewise']:
+        func_list = all_results.get(class_name, [])
+        print(f"\n{class_name}: {len(func_list)} функций")
+        
+        # Проверяем первые 3 функции
+        for i, func_data in enumerate(func_list):
+            print(f"  Функция {i}: id={func_data.get('id')}")
+            print(f"    Ключи: {list(func_data.keys())}")
+            if 'hyperparams' in func_data:
+                print(f"    hyperparams: {func_data['hyperparams']}")
+            else:
+                print(f"    hyperparams: ОТСУТСТВУЮТ!")
+
 
 
 def compute_mean_hyperparams(data_file='del_results/best_del_results.pkl', 
@@ -192,16 +211,15 @@ def compute_mean_hyperparams(data_file='del_results/best_del_results.pkl',
     
 
 if __name__ == "__main__":
-    # 1. Создаем сравнительные графики для случайных функций
+    # Создаем сравнительные графики для случайных функций и сохраняем средние гиперпараметры для каждого класса
     plot_random_functions_from_results(
-        data_file='del_results/best_del_results.pkl',
-        n_samples=3,
+        data_file='del_results/all_results.pkl',
+        n_samples=25,
         save_dir='comparison_plots_res'
     )
     
-    # 2. Вычисляем и сохраняем средние гиперпараметры
     compute_mean_hyperparams(
-        data_file='del_results/best_del_results.pkl',
+        data_file='del_results/all_results.pkl',
         output_file='Mean_HyperP.pkl'
     )
     

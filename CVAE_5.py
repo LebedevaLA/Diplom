@@ -11,6 +11,7 @@ import seaborn as sns
 from tensorflow.keras.optimizers import Adam
 from tensorflow.keras.callbacks import EarlyStopping, ReduceLROnPlateau
 from GenerateFunc_1 import Unimodal, Periodic, Piecewise  
+from Create_TestFunc_4 import ComplexUnimodal, ComplexPeriodic
 
 # ==== КЛАСС CVAE ====
 class CVAE(tf.keras.Model):
@@ -366,14 +367,14 @@ class FunctionClassifier:
         
         print("\nClassification Report:")
         print(classification_report(y_test, y_pred, 
-                                    target_names=['Unimodal', 'Periodic', 'Piecewise']))
+                                    target_names=['unimodal', 'periodic', 'piecewise']))
         
         # Матрица ошибок
         cm = confusion_matrix(y_test, y_pred)
         plt.figure(figsize=(8, 6))
         sns.heatmap(cm, annot=True, fmt='d', cmap='Blues',
-                    xticklabels=['Unimodal', 'Periodic', 'Piecewise'],
-                    yticklabels=['Unimodal', 'Periodic', 'Piecewise'])
+                    xticklabels=['unimodal', 'periodic', 'piecewise'],
+                    yticklabels=['unimodal', 'periodic', 'piecewise'])
         plt.title(f'Confusion Matrix ({data_name} Data)')
         plt.tight_layout()
         plt.savefig(f'{data_name.lower()}_confusion_matrix.png', dpi=150)
@@ -382,7 +383,7 @@ class FunctionClassifier:
         # Точность по классам
         class_accuracy = cm.diagonal() / cm.sum(axis=1)
         print("\nТочность по классам:")
-        for i, name in enumerate(['Unimodal', 'Periodic', 'Piecewise']):
+        for i, name in enumerate(['unimodal', 'periodic', 'piecewise']):
             print(f"  {name}: {class_accuracy[i]:.2%}")
         
         print(f"\nОбщая точность: {np.mean(y_pred == y_test):.2%}")
@@ -400,21 +401,14 @@ class FunctionClassifier:
                 all_functions.append({
                     'id': func.get('id', 0),
                     'type': func['type'],
-                    'true_class': class_name,
+                    'true_class': class_name.replace('test_', ''),
                     'func_obj': func['func_obj'],
                     'x': func['x'],
                     'y': func['y'],
-                    'params': func.get('params', func.get('true_params', []))
+                    'true_params': func.get('true_params', [])
                 })
         
-        # Маппинг для вывода имен классов
-        true_class_names = {
-            'test_unimodal': 'Unimodal',
-            'test_periodic': 'Periodic',
-            'test_piecewise': 'Piecewise'
-        }
-        
-        pred_class_names = ['Unimodal', 'Periodic', 'Piecewise']
+        pred_class_names = ['unimodal', 'periodic', 'piecewise']
         
         # Структура для хранения только правильно классифицированных функций
         correct_classify = {
@@ -423,12 +417,6 @@ class FunctionClassifier:
             'piecewise': []
         }
         
-        # Маппинг для сохранения в нужные ключи
-        save_class_map = {
-            'Unimodal': 'unimodal',
-            'Periodic': 'periodic',
-            'Piecewise': 'piecewise'
-        }
         
         print("\n" + "="*60)
         print("ДЕТАЛЬНЫЙ АНАЛИЗ ПО КАЖДОЙ ФУНКЦИИ")
@@ -439,26 +427,24 @@ class FunctionClassifier:
         
         for idx, (true_label, pred_label) in enumerate(zip(y_test, y_pred)):
             func_info = all_functions[idx]
-            true_class_name = true_class_names.get(func_info['true_class'], func_info['true_class'])
+            true_class_name = func_info['true_class']
             pred_class_name = pred_class_names[pred_label]
             prob = y_pred_proba[idx][pred_label]
             is_correct = (true_label == pred_label)
             
             if is_correct:
                 correct_count += 1
-                save_key = save_class_map[true_class_name]
-                
                 # Сохраняем функцию в правильный формат
                 saved_func = {
                     'func_obj': func_info['func_obj'],
                     'x': func_info['x'],
                     'y': func_info['y'],
                     'true_params': func_info['true_params'],
-                    'class': true_class_name.lower(),
+                    'class': true_class_name,
                     'id': func_info['id'],
                     'type':func_info['type']
                 }
-                correct_classify[save_key].append(saved_func)
+                correct_classify[true_class_name].append(saved_func)
                 status = "✓"
             else:
                 status = "✗"
@@ -474,9 +460,9 @@ class FunctionClassifier:
         
         # Статистика по классам
         print("\nСтатистика по классам:")
-        for class_name in ['Unimodal', 'Periodic', 'Piecewise']:
-            class_funcs = correct_classify[class_name.lower()]
-            print(f"  {class_name}: {len(class_funcs)}/{len([f for f in all_functions if true_class_names.get(f['true_class'], '') == class_name])} = {len(class_funcs)/len([f for f in all_functions if true_class_names.get(f['true_class'], '') == class_name]):.2%}")
+        for class_name in ['unimodal', 'periodic', 'piecewise']:
+            class_funcs = correct_classify[class_name]
+            print(f"  {class_name}: {len(class_funcs)}/{len([f for f in all_functions if f['true_class'] == class_name])} = {len(class_funcs)/len([f for f in all_functions if f['true_class'] == class_name]):.2%}")
         
         # Сохраняем правильно классифицированные функции в файл
         output_file = 'correctly_classified.pkl'

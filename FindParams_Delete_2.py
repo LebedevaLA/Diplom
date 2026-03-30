@@ -342,19 +342,24 @@ def process_single_function(func_data, class_name, base_dir='results'):
 
 
 
-def process_all_functions(data_file='train_functions.pkl', base_dir = 'del_results'):
+def process_all_functions(data_file='train_functions.pkl', base_dir = 'del_results', resf = 'del_results/all_results.pkl'):
     # Загружаем данные
     with open(data_file, 'rb') as f:
         all_data = pickle.load(f)
     
-    all_results = { #структура данных для всех рультатов - лучший результат с удалением, 
-        #результат без удаления и исходные данные
-        'unimodal': [],
-        'periodic': [],
-        'piecewise': []
-    }
-
-    file = os.path.join(base_dir, 'all_results.pkl')
+    if os.path.exists(resf):
+        with open(resf, 'rb') as fl:
+            all_results = pickle.load(fl)
+        print(f"Загружены существующие результаты из {resf}")
+        print(f"  unimodal: {len(all_results.get('unimodal', []))} функций")
+        print(f"  periodic: {len(all_results.get('periodic', []))} функций")
+        print(f"  piecewise: {len(all_results.get('piecewise', []))} функций")
+    else:
+        all_results = {
+            'unimodal': [],
+            'periodic': [],
+            'piecewise': []
+        }
 
     # Обрабатываем каждый класс
     for class_name, func_list in all_data.items():
@@ -373,8 +378,8 @@ def process_all_functions(data_file='train_functions.pkl', base_dir = 'del_resul
             combined_data = {**func_data, **best_del_result}
             
             all_results[class_name].append(combined_data)
-            with open(file, 'wb') as f:
-                pickle.dump(all_results, f)
+            with open(resf, 'wb') as fi:
+                pickle.dump(all_results, fi)
                 
             # Небольшая задержка
             time.sleep(1)

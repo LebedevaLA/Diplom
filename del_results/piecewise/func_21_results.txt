@@ -1,0 +1,102 @@
+================================================================================
+RESULTS FOR piecewise FUNCTION 21
+================================================================================
+
+ORIGINAL DATA:
+  True parameters: [0.2586881670417122, -0.29484861576336163, 1.2937905378238796, 1.952958246641185, -1.788426830661161]
+  Number of points: 100
+  X range: [-16.00, 16.00]
+
+WITHOUT DELETION:
+  Found parameters: [ 0.25868817 -0.29484864  1.29379042  1.95295833 -1.7884273 ]
+  Error: 0.000000
+  nfev: 15099
+
+================================================================================
+TOP 5% RESULTS WITH DELETION (total 6 results)
+================================================================================
+
+--- Result 1 ---
+  Error: 0.256983
+  Found parameters: [ 0.24940297 -0.02817433  0.47412832  2.0145969  -1.66077096]
+  Hyperparameters:
+    min_point: 62
+    step: 32
+    coeff: 0.7
+    stable_iterations: 1506
+  Function calls: 708223
+  Total residual calls: 10482
+  Remaining points: 62
+  Remaining points values: [-15.35353535 -15.03030303 -13.09090909 -12.76767677 -12.44444444
+ -12.12121212 -11.47474747 -10.82828283  -9.53535354  -9.21212121]... (first 10)
+
+--- Result 2 ---
+  Error: 0.436998
+  Found parameters: [ 0.28554564 -1.03853468  1.73514341  1.98145487 -0.84383042]
+  Hyperparameters:
+    min_point: 56
+    step: 16
+    coeff: 0.6
+    stable_iterations: 1459
+  Function calls: 651952
+  Total residual calls: 10476
+  Remaining points: 56
+  Remaining points values: [-15.35353535 -15.03030303 -13.73737374 -12.76767677 -12.44444444
+ -11.7979798  -11.15151515 -10.82828283 -10.50505051 -10.18181818]... (first 10)
+
+--- Result 3 ---
+  Error: 0.436998
+  Found parameters: [ 0.28554564 -1.03853468  1.73514341  1.98145487 -0.84383042]
+  Hyperparameters:
+    min_point: 26
+    step: 29
+    coeff: 0.1
+    stable_iterations: 1474
+  Function calls: 512553
+  Total residual calls: 10164
+  Remaining points: 36
+  Remaining points values: [-14.70707071 -10.18181818  -9.85858586  -9.53535354  -9.21212121
+  -8.88888889  -8.56565657  -8.24242424  -7.91919192  -6.94949495]... (first 10)
+
+--- Result 4 ---
+  Error: 0.436998
+  Found parameters: [ 0.28554564 -1.03853468  1.73514341  1.98145487 -0.84383042]
+  Hyperparameters:
+    min_point: 39
+    step: 44
+    coeff: 0.5
+    stable_iterations: 1488
+  Function calls: 652121
+  Total residual calls: 10452
+  Remaining points: 56
+  Remaining points values: [-13.41414141 -13.09090909 -12.76767677 -12.44444444 -12.12121212
+ -11.7979798  -11.47474747 -11.15151515 -10.82828283 -10.50505051]... (first 10)
+
+--- Result 5 ---
+  Error: 0.436998
+  Found parameters: [ 0.28554564 -1.03853468  1.73514341  1.98145487 -0.84383042]
+  Hyperparameters:
+    min_point: 61
+    step: 46
+    coeff: 0.3
+    stable_iterations: 1481
+  Function calls: 697944
+  Total residual calls: 10482
+  Remaining points: 61
+  Remaining points values: [-15.03030303 -14.70707071 -14.38383838 -14.06060606 -13.73737374
+ -12.76767677 -12.44444444 -12.12121212 -11.7979798  -11.47474747]... (first 10)
+
+--- Result 6 ---
+  Error: 0.467681
+  Found parameters: [ 0.27955369 -0.79898176  1.23103762  1.92288634 -0.06784444]
+  Hyperparameters:
+    min_point: 20
+    step: 52
+    coeff: 0.5
+    stable_iterations: 1350
+  Function calls: 508057
+  Total residual calls: 10476
+  Remaining points: 39
+  Remaining points values: [-12.44444444 -10.18181818  -9.85858586  -9.53535354  -9.21212121
+  -8.88888889  -8.24242424  -7.91919192  -7.5959596   -7.27272727]... (first 10)
+

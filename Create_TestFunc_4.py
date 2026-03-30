@@ -18,7 +18,6 @@ class ComplexUnimodal:
             'quadratic_log',      # парабола + логарифм
             'quadratic_exp',      # парабола + экспонента
             'gaussian_poly',      # гауссиан + полином
-            'double_quadratic',   # две параболы с разными весами
         ]
         
         if func_type is None:
@@ -94,7 +93,7 @@ class ComplexPeriodic:
     
     def __init__(self, func_type=None):
         self.types = [
-            'sin_cos_mix',        # sin + cos с разными частотами
+            'sin_cos_sin',        # sin + cos + sin
             'sin_sin',             # два синуса с разными частотами
             'cos_cos',             # два косинуса с разными частотами
         ]
@@ -110,22 +109,24 @@ class ComplexPeriodic:
     
     def _generate_random_params(self):
         params = {}
-        
-        if self.func_type == 'sin_cos_mix':
+        if self.func_type == 'sin_cos_sin':
             params['amp1'] = np.random.uniform(0.5, 4.0)
-            params['freq1'] = np.random.uniform(0.5, 3.0)
+            params['freq1'] = np.random.uniform(0.5, 1.0)
             params['phase1'] = np.random.uniform(0, 2*np.pi)
             params['amp2'] = np.random.uniform(0.5, 4.0)
-            params['freq2'] = np.random.uniform(0.5, 3.0)
+            params['freq2'] = np.random.uniform(0.5, 1.0)
             params['phase2'] = np.random.uniform(0, 2*np.pi)
+            params['amp3'] = np.random.uniform(0.5, 4.0)
+            params['freq3'] = np.random.uniform(0.5, 1.0)
+            params['phase3'] = np.random.uniform(0, 2*np.pi)
             params['shift'] = np.random.uniform(-3.0, 3.0)
             
         elif self.func_type == 'sin_sin':
             params['amp1'] = np.random.uniform(0.5, 4.0)
-            params['freq1'] = np.random.uniform(0.5, 3.0)
+            params['freq1'] = np.random.uniform(0.1, 0.5)
             params['phase1'] = np.random.uniform(0, 2*np.pi)
             params['amp2'] = np.random.uniform(0.5, 4.0)
-            params['freq2'] = np.random.uniform(0.5, 3.0)
+            params['freq2'] = np.random.uniform(0.1, 0.5)
             params['phase2'] = np.random.uniform(0, 2*np.pi)
             params['shift'] = np.random.uniform(-3.0, 3.0)
             
@@ -144,9 +145,12 @@ class ComplexPeriodic:
     def evaluate(self, params_list, x):
         x = np.asarray(x).flatten()
         
-        if self.func_type == 'sin_cos_mix':
-            amp1, freq1, phase1, amp2, freq2, phase2, shift = params_list
-            return amp1*np.sin(freq1*x + phase1) + amp2*np.cos(freq2*x + phase2) + shift
+        if self.func_type == 'sin_cos_sin':
+            amp1, freq1, phase1, amp2, freq2, phase2, amp3, freq3, phase3, shift = params_list
+            return (amp1*np.sin(freq1*x + phase1) + 
+                    amp2*np.cos(freq2*x + phase2) + 
+                    amp3*np.sin(freq3*x + phase3) + 
+                    shift)
             
         elif self.func_type == 'sin_sin':
             amp1, freq1, phase1, amp2, freq2, phase2, shift = params_list

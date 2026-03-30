@@ -1,4 +1,3 @@
-
 import matplotlib.pyplot as plt
 import numpy as np
 import pickle
@@ -404,6 +403,7 @@ if __name__ == "__main__":
         print(f"Загружены x_vals из файла, размер: {len(x_vals)}")
     else:
         x_vals = np.linspace(-16, 16, 100)
+        np.save('x_vals.npy', x_vals)
 
     unimodal_gen = UnimodalGenerator(x_vals)
     periodic_gen = PeriodicGenerator(x_vals)

@@ -1,0 +1,111 @@
+================================================================================
+RESULTS FOR piecewise FUNCTION 16
+================================================================================
+
+ORIGINAL DATA:
+  True parameters: [1.1093438896661783, 0.11016789018195788, 3.696582268451145, 0.6184725154745987, 1.9994713501327968, 0.3784669597009622, 1.5459037229581838, -1.9150517324988252, -1.1780105221290573]
+  Number of points: 100
+  X range: [-16.00, 16.00]
+
+WITHOUT DELETION:
+  Found parameters: [ 0.73387196  0.16073661  4.37774167  0.92766904  2.00403236  0.39095591
+  1.54594877 -1.91472691 -1.1732326 ]
+  Error: 0.159844
+  nfev: 27435
+
+================================================================================
+TOP 5% RESULTS WITH DELETION (total 6 results)
+================================================================================
+
+--- Result 1 ---
+  Error: 1.170432
+  Found parameters: [-3.36803266e-02  1.85996222e-01  3.33874580e+00  1.63467823e+00
+ -2.35121985e-02  1.42278044e+00 -2.59685661e-03 -2.59935758e+00
+  1.46287509e+00]
+  Hyperparameters:
+    min_point: 37
+    step: 21
+    coeff: 0.3
+    stable_iterations: 1668
+  Function calls: 931839
+  Total residual calls: 18240
+  Remaining points: 37
+  Remaining points values: [-11.15151515 -10.82828283  -6.62626263  -6.3030303   -5.97979798
+  -5.65656566  -5.33333333  -4.04040404  -3.07070707  -2.42424242]... (first 10)
+
+--- Result 2 ---
+  Error: 1.283268
+  Found parameters: [ 1.22084288e-02  2.03226436e-01  4.98605260e+00  1.64927250e+00
+ -4.03971479e-02  1.48663534e+00 -2.75729681e-03 -1.27367646e+00
+  1.52286016e+00]
+  Hyperparameters:
+    min_point: 32
+    step: 16
+    coeff: 0.2
+    stable_iterations: 1233
+  Function calls: 689739
+  Total residual calls: 18310
+  Remaining points: 32
+  Remaining points values: [-8.88888889 -8.24242424 -3.39393939 -3.07070707 -2.42424242 -2.1010101
+  0.16161616  1.77777778  2.42424242  3.07070707]... (first 10)
+
+--- Result 3 ---
+  Error: 1.291341
+  Found parameters: [-1.91997685  0.17583905  3.28922881  3.92133701  1.81770256  0.86184596
+  1.52214259 -2.11494793 -5.10606486]
+  Hyperparameters:
+    min_point: 15
+    step: 41
+    coeff: 0.7
+    stable_iterations: 2605
+  Function calls: 1322688
+  Total residual calls: 18310
+  Remaining points: 18
+  Remaining points values: [-14.38383838  -4.04040404  -2.42424242  -1.77777778   0.48484848
+   0.80808081   1.45454545   2.1010101    2.42424242   3.07070707]... (first 10)
+
+--- Result 4 ---
+  Error: 1.291341
+  Found parameters: [-1.91997685  0.17583905  3.28922881  3.92133701  1.81770256  0.86184596
+  1.52214259 -2.11494793 -5.10606486]
+  Hyperparameters:
+    min_point: 62
+    step: 52
+    coeff: 0.2
+    stable_iterations: 2700
+  Function calls: 1352186
+  Total residual calls: 19130
+  Remaining points: 62
+  Remaining points values: [-13.41414141 -13.09090909 -12.44444444 -11.15151515 -10.82828283
+ -10.50505051 -10.18181818  -9.21212121  -8.88888889  -8.56565657]... (first 10)
+
+--- Result 5 ---
+  Error: 1.291341
+  Found parameters: [-1.91997685  0.17583905  3.28922881  3.92133701  1.81770256  0.86184596
+  1.52214259 -2.11494793 -5.10606486]
+  Hyperparameters:
+    min_point: 56
+    step: 15
+    coeff: 0.9
+    stable_iterations: 2704
+  Function calls: 1403688
+  Total residual calls: 19680
+  Remaining points: 56
+  Remaining points values: [-12.12121212 -11.7979798  -11.15151515 -10.18181818  -9.21212121
+  -8.88888889  -8.56565657  -7.5959596   -6.62626263  -6.3030303 ]... (first 10)
+
+--- Result 6 ---
+  Error: 1.291341
+  Found parameters: [-1.91997685  0.17583905  3.28922881  3.92133701  1.81770256  0.86184596
+  1.52214259 -2.11494793 -5.10606486]
+  Hyperparameters:
+    min_point: 21
+    step: 29
+    coeff: 0.2
+    stable_iterations: 2647
+  Function calls: 1390820
+  Total residual calls: 18370
+  Remaining points: 31
+  Remaining points values: [-3.71717172 -3.39393939 -2.74747475 -2.42424242 -2.1010101  -1.77777778
+  0.16161616  0.80808081  1.13131313  1.45454545]... (first 10)
+
